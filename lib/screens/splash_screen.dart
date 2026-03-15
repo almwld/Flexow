@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../theme/app_theme.dart';
 import 'login_screen.dart';
-import 'main_navigation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -79,27 +77,24 @@ class _SplashScreenState extends State<SplashScreen>
     _logoController.forward();
     _textController.forward();
 
-    Timer(const Duration(seconds: 5), _checkAuthState);
-  }
-
-  void _checkAuthState() {
-    final user = Supabase.instance.client.auth.currentUser;
-
-    if (mounted) {
-      Navigator.of(context).pushReplacement(
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-            user != null ? const MainNavigation() : const LoginScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-          transitionDuration: const Duration(milliseconds: 800),
-        ),
-      );
-    }
+    // الانتقال المباشر إلى شاشة تسجيل الدخول بعد 5 ثوانٍ
+    Timer(const Duration(seconds: 5), () {
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => 
+                const LoginScreen(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 800),
+          ),
+        );
+      }
+    });
   }
 
   @override
