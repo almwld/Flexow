@@ -42,10 +42,10 @@ class AppTheme {
         backgroundColor: darkSurface,
         foregroundColor: Colors.white,
       ),
-      cardTheme: CardTheme(
+      cardTheme: const CardThemeData(
         color: darkCard,
         elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -94,10 +94,10 @@ class AppTheme {
         backgroundColor: lightSurface,
         foregroundColor: Colors.black87,
       ),
-      cardTheme: CardTheme(
+      cardTheme: const CardThemeData(
         color: lightCard,
         elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
