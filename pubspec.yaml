@@ -20,14 +20,6 @@ dependencies:
   shared_preferences: ^2.2.2
   intl: ^0.18.1
   url_launcher: ^6.2.2
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  path_provider: ^2.1.5
-  geolocator: ^11.1.0
-  geocoding: ^3.0.0
-  flutter_local_notifications: ^17.2.4
-  firebase_core: ^3.12.1
-  firebase_messaging: ^15.2.4
 
 dev_dependencies:
   flutter_test:
