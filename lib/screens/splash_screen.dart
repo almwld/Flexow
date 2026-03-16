@@ -17,9 +17,6 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _logoController;
   late AnimationController _particleController;
   late AnimationController _textController;
-  late Animation<double> _logoScaleAnimation;
-  late Animation<double> _logoRotationAnimation;
-  late Animation<double> _fadeAnimation;
 
   @override
   void initState() {
@@ -40,45 +37,11 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 1500),
     );
 
-    _logoScaleAnimation = TweenSequence<double>([
-      TweenSequenceItem(
-        tween: Tween<double>(begin: 0.0, end: 1.2),
-        weight: 40,
-      ),
-      TweenSequenceItem(
-        tween: Tween<double>(begin: 1.2, end: 1.0),
-        weight: 20,
-      ),
-      TweenSequenceItem(
-        tween: Tween<double>(begin: 1.0, end: 1.0),
-        weight: 40,
-      ),
-    ]).animate(
-      CurvedAnimation(
-        parent: _logoController,
-        curve: Curves.easeOutBack,
-      ),
-    );
-
-    _logoRotationAnimation = Tween<double>(begin: -0.5, end: 0.0).animate(
-      CurvedAnimation(
-        parent: _logoController,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
-      ),
-    );
-
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _logoController,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeIn),
-      ),
-    );
-
     _logoController.forward();
     _textController.forward();
 
-    // الانتقال المباشر إلى شاشة تسجيل الدخول بعد 5 ثوانٍ
-    Timer(const Duration(seconds: 5), () {
+    // الانتقال إلى شاشة تسجيل الدخول بعد 3 ثوانٍ
+    Timer(const Duration(seconds: 3), () {
       if (mounted) {
         Navigator.of(context).pushReplacement(
           PageRouteBuilder(
@@ -116,21 +79,7 @@ class _SplashScreenState extends State<SplashScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AnimatedBuilder(
-                  animation: _logoController,
-                  builder: (context, child) {
-                    return FadeTransition(
-                      opacity: _fadeAnimation,
-                      child: Transform.scale(
-                        scale: _logoScaleAnimation.value,
-                        child: Transform.rotate(
-                          angle: _logoRotationAnimation.value,
-                          child: _buildLogo(),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                _buildLogo(),
                 const SizedBox(height: 40),
                 _buildAppName()
                   .animate(controller: _textController)
